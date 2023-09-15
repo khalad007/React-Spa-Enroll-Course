@@ -1,17 +1,28 @@
 import { data } from "autoprefixer";
 import { useEffect, useState } from "react";
+import Cart from "../Cart/Cart";
 
 const Cards = () => {
     const [cards, setCards] = useState([]);
 
+    const [selectedCourse,setSelectedCourse] = useState([]);
+    
+    
     useEffect(() => {
         fetch('data.json')
             .then(res => res.json())
             .then(data => setCards(data))
     }, [])
-    console.log(cards);
+
+    const handleSelectCourse = (card) => {
+        setSelectedCourse([...selectedCourse, card]);
+    }
+
+    console.log(selectedCourse);
     return (
+        
         <div className="flex justify-around">
+            
             <div className="grid grid-cols-3">
                 {/* card  section */}
                 {/* card  section */}
@@ -25,7 +36,7 @@ const Cards = () => {
                             <p className="text-gray-500 mt-4 text-sm font-normal">Price: {card.price}</p>
                             <p className="text-gray-500 mt-4 text-sm font-normal">Creadit: {card.video_length}</p>
                         </div>
-                        <button className="bg-blue-600 h-10 w-full rounded-md text-white font-semibold mt-3">Select</button>
+                        <button onClick={()=>handleSelectCourse(card)} className="bg-blue-600 h-10 w-full rounded-md text-white font-semibold mt-3">Select</button>
                     </div>))
                 }
             </div>
@@ -35,7 +46,7 @@ const Cards = () => {
             <div className="h-96 w-64 mt-7 bg-white rounded-md p-4">
                 <h1 className="text-blue-600 font-semibold text-base ">Credit Hour Remaining 7 hr</h1>
                 <hr className="border-[1px] text-gray-600 mt-2" />
-                <p className="font-bold text-lg">Course Name</p>
+                <Cart selectedCourse={selectedCourse}></Cart>
                 <hr className="border-[1px] text-gray-600 mt-2" />
                 <p className="text-base font-medium text-gray-500">Total Credit Hour : </p>
                 <hr className="border-[1px] text-gray-600 mt-2" />
