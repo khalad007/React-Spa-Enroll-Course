@@ -2,8 +2,11 @@
 const Header = () => {
     return (
         <div>
-            <h1 className='text-6xl text-center'>Course Registration</h1>
-            
+            {/* heading */}
+            <div>
+                <h1 className='text-3xl font-bold text-center mt-6'>Course Registration</h1>
+            </div>
+           
         </div>
 
     );
